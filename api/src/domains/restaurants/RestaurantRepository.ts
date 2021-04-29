@@ -1,9 +1,10 @@
 import { Sequelize } from 'sequelize/types';
 import Restaurant from './Restaurant'
 import RestaurantFactory from './RestaurantFactory';
-export default class RestaurantRepository {
+import { RepositoryInterface } from '../../interfaces';
+export default class RestaurantRepository implements RepositoryInterface {
 
-    public async all() : Promise< Array<Restaurant> >
+    public async all() : Promise<Array<Restaurant>>
     {
         return Restaurant.findAll();
     }
