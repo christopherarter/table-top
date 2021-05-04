@@ -2,10 +2,12 @@ import {
     Column,
     CreatedAt,
     DeletedAt,
+    HasMany,
     Model,
     PrimaryKey, Table,
     UpdatedAt
   } from 'sequelize-typescript'
+import { Reservation } from '../reservations'
   
   @Table({ tableName: 'restaurants' })
   export class Restaurant extends Model<Restaurant> {
@@ -27,5 +29,8 @@ import {
   
     @UpdatedAt
     updated_at: string
+
+    @HasMany(() => Reservation)
+    reservations: Reservation[]
   }
 export default Restaurant;  

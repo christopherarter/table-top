@@ -1,9 +1,13 @@
-import { Controller, Get, Post } from '@overnightjs/core'
+import { ChildControllers, ClassOptions, Controller, Get, Post } from '@overnightjs/core'
 import { Request, Response } from 'express'
+import { ReservationController } from '../../reservations';
 import RestaurantRepository from '../RestaurantRepository';
 import RestaurantResource from './RestaurantResource';
-
-@Controller('test')
+@Controller('restaurants')
+@ClassOptions({mergeParams: true})
+@ChildControllers([
+  new ReservationController
+])
 export default class RestaurantsController {
 
   protected repository: RestaurantRepository;
@@ -20,14 +24,14 @@ export default class RestaurantsController {
     }));
   }
 
-  @Get(':id')
+  @Get(':restaurant_id')
   private async show(req: Request, res: Response) {
-    const record = (await this.repository.findById(req.params.id));
+    const record = (await this.repository.findById(req.params.restaurant_id));
     return res.send( RestaurantResource(record) );
   }
 
   @Post('/')
   private async stor(req: Request, res: Response) {
-    
+
   }
 }

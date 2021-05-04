@@ -9,7 +9,7 @@ export default class RestaurantRepository implements RepositoryInterface {
         return Restaurant.findAll();
     }
 
-    public async findById(key: any) : Promise<Restaurant | null> {
+    public findById(key: any) : Promise<Restaurant | null> {
         return Restaurant.findByPk(key);
     }
 
